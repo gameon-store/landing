@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneio de Yu-Gi-Oh!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("img/background-2.jpg");
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita repetição */
+            background-attachment: fixed; /* Fixa o fundo ao rolar a página */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centraliza verticalmente o conteúdo */
+            min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+            text-align: center;
+            position: relative; /* Permite posicionar a camada escura */
+        }
+
+        /* Camada escura sobre o fundo */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.80); /* Preto com 80% de transparência */
+            z-index: -1; /* Coloca a camada atrás do conteúdo */
+        }
+
+        /* Logo no topo da página */
+        .logo {
+            width: 275px;
+            height: 275px;
+            margin-top: 20px; /* Espaçamento do topo */
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column; /* Altera para coluna */
+            max-width: 80%; /* Largura máxima do conteúdo */
+            gap: 20px; /* Espaçamento entre o Flyer e o Formulário */
+            align-items: center; /* Centraliza os itens */
+            z-index: 1; /* Garante que o conteúdo fique acima da camada escura */
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 80%;
+            max-width:700px;
+            padding: 20px;
+            background-color: rgba(58, 58, 74, 0.8); /* Fundo semi-transparente */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .flyer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flyer img {
+            max-width: 100%; /* Largura máxima da imagem */
+            height: auto; /* Altura automática (mantém a proporção) */
+            border-radius: 10px;
+        }
+
+        .formulario {
+            width: 100%;
+            display: none; /* Oculta o formulário inicialmente */
+            margin-top: 20px; /* Espaçamento acima do formulário */
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px; /* Altura do iframe */
+            border: none;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #ff9908; /* Cor do botão PARTICIPAR */
+            color: #1e1e2e;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px; /* Espaçamento acima do botão */
+        }
+
+        button:hover {
+            background: #e68a00; /* Cor do botão ao passar o mouse */
+        }
+
+        /* Container do scrolling horizontal */
+        .gallery {
+            width: 100%; /* Ocupa toda a largura da página */
+            overflow: hidden; /* Esconde o overflow para criar o efeito de scroll */
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.95); /* Fundo preto com 95% de transparência */
+            display: flex;
+            align-items: center; /* Centraliza verticalmente as imagens */
+            margin-top: 100px;
+            margin-bottom: 100px;
+            height: 300px; /* Altura fixa da galeria */
+        }
+
+        /* Container das imagens */
+        .scroll-container {
+            display: flex;
+            animation: scroll 25s linear infinite; /* Animação de scroll */
+        }
+
+        /* Animação de scroll horizontal */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0); /* Começa no início */
+            }
+            100% {
+                transform: translateX(-50%); /* Move para a esquerda até a metade do conteúdo */
+            }
+        }
+
+        /* Estilo das imagens na galeria */
+        .gallery img {
+            height: 250px; /* Altura fixa das imagens */
+            width: auto; /* Largura automática (mantém a proporção) */
+            border-radius: 10px;
+            margin-right: 15px; /* Distância entre as imagens */
+            object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+        }
+
+        /* Banner de contato no rodapé */
+        .contact-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Altura do banner */
+            background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Espaçamento entre os itens */
+            z-index: 1000; /* Garante que o banner fique acima de tudo */
+        }
+
+        .contact-banner a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px; /* Tamanho da fonte */
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Espaçamento entre ícone e texto */
+        }
+
+        .contact-banner a:hover {
+            color: #ff9908; /* Cor ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo no topo da página -->
+    <img src="img/logo.png" alt="Logo do Torneio" class="logo">
+
+    <div class="content">
+        <div class="container">
+            <!-- Flyer -->
+            <div class="flyer">
+                <img src="img/flyer.jpg" alt="Flyer do Torneio">
+                <br/>
+                <!-- Botão PARTICIPAR -->
+                <button onclick="mostrarFormulario()">PARTICIPAR</button>
+            </div>
+
+            <!-- Formulário do Google (oculto inicialmente) -->
+            <div class="formulario" id="formulario">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScdipGlsNCvtjmmg1poofH8u-GI0tX_SuUbq7yJcB1EvejwTw/viewform?usp=header">Carregando…</iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galeria com scrolling horizontal -->
+    <div class="gallery">
+        <div class="scroll-container">
+            <img src="img/image-1.jpeg" alt="Torneio anterior">
+            <img src="img/image-2.jpeg" alt="Torneio anterior">
+            <img src="img/image-3.jpeg" alt="Torneio anterior">
+            <img src="img/image-4.jpeg" alt="Torneio anterior">
+            <img src="img/image-5.jpeg" alt="Torneio anterior">
+            <img src="img/image-6.jpeg" alt="Torneio anterior">
+            <img src="img/image-7.jpeg" alt="Torneio anterior">
+            <!-- Repetir as imagens para criar o efeito de loop -->
+            <img src="img/image-1.jpeg" alt="Torneio anterior">
+            <img src="img/image-2.jpeg" alt="Torneio anterior">
+            <img src="img/image-3.jpeg" alt="Torneio anterior">
+            <img src="img/image-4.jpeg" alt="Torneio anterior">
+            <img src="img/image-5.jpeg" alt="Torneio anterior">
+            <img src="img/image-6.jpeg" alt="Torneio anterior">
+            <img src="img/image-7.jpeg" alt="Torneio anterior">
+        </div>
+    </div>
+
+    <!-- Banner de contato no rodapé -->
+    <div class="contact-banner">
+        <a href="+55 19 99982-2720">📞 (19)99982-2720</a>
+        <a href="https://instagram.com/gameOn!" target="_blank">📷 @gameOn!</a>
+        <a href="mailto:seuemail@exemplo.com">✉️ chiquinho_chicasso@exemplo.com</a>
+        <a href="https://chat.whatsapp.com/seugrupo" target="_blank">💬 Grupo WhatsApp</a>
+    </div>
+
+    <script>
+        // Função para mostrar o formulário
+        function mostrarFormulario() {
+            const formulario = document.getElementById('formulario');
+            formulario.style.display = 'block'; // Exibe o formulário
+        }
+    </script>
+</body>
+</html>
