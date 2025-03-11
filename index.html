@@ -305,10 +305,10 @@
                 })
                 .then(data => {
                     const winnersList = document.getElementById('winners-list');
-                    const winners = data.split(' ');
-                    winners.forEach(winner => {
-                        if (winner.trim() !== '') {
-                            const [date, name] = winner.split(',');
+                    const lines = data.split('\n'); // Divide o CSV por linhas
+                    lines.forEach(line => {
+                        if (line.trim() !== '') { // Ignora linhas vazias
+                            const [date, name] = line.split(','); // Divide cada linha por vírgula
                             const li = document.createElement('li');
                             li.textContent = `${date.trim()}: ${name.trim()}`;
                             winnersList.appendChild(li);
