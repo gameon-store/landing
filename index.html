@@ -310,7 +310,6 @@
                         if (winner.trim() !== '') {
                             const [date, name] = winner.split(',');
                             const li = document.createElement('li');
-                            // Usar decodeURIComponent para tratar caracteres especiais
                             li.textContent = `${date.trim()}: ${name.trim()}`;
                             winnersList.appendChild(li);
                         }
