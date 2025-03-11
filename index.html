@@ -8,23 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             background-image: url("img/background-2.jpg");
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Evita repetição */
-            background-attachment: fixed; /* Fixa o fundo ao rolar a página */
-            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
             color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centraliza verticalmente o conteúdo */
-            min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+            justify-content: center;
+            min-height: 100vh;
             text-align: center;
-            position: relative; /* Permite posicionar a camada escura */
+            position: relative;
         }
 
-        /* Camada escura sobre o fundo */
         body::before {
             content: "";
             position: absolute;
@@ -32,35 +31,69 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.80); /* Preto com 80% de transparência */
-            z-index: -1; /* Coloca a camada atrás do conteúdo */
+            background-color: rgba(0, 0, 0, 0.80);
+            z-index: -1;
         }
 
-        /* Logo no topo da página */
         .logo {
-            width: 275px;
-            height: 275px;
-            margin-top: 20px; /* Espaçamento do topo */
+            height: 20vh;
+            margin-top: 10px;
+            align-self: left;
         }
 
         .content {
             display: flex;
-            flex-direction: column; /* Altera para coluna */
-            max-width: 80%; /* Largura máxima do conteúdo */
-            gap: 20px; /* Espaçamento entre o Flyer e o Formulário */
-            align-items: center; /* Centraliza os itens */
-            z-index: 1; /* Garante que o conteúdo fique acima da camada escura */
+            flex-direction: row;
+            max-width: 90%;
+            gap: 20px;
+            align-items: flex-start;
+            z-index: 1;
             margin-top: 20px;
         }
 
         .container {
-            width: 80%;
-            max-width:700px;
+            width: 60%;
+            max-width: 800px;
             padding: 20px;
-            background-color: rgba(58, 58, 74, 0.8); /* Fundo semi-transparente */
+            height:50vh;
+            background-color: rgba(58, 58, 74, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin: 0 auto; /* Centraliza o container */
+        }
+
+        .winners-list {
+            width: 25%;
+            padding: 20px;
+            background-color: rgba(58, 58, 74, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .winners-list h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ff9908;
+        }
+
+        .winners-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .winners-list li {
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
         }
 
         .flyer {
@@ -71,20 +104,14 @@
         }
 
         .flyer img {
-            max-width: 100%; /* Largura máxima da imagem */
-            height: auto; /* Altura automática (mantém a proporção) */
+            max-width: 100%;
+            height: auto;
             border-radius: 10px;
-        }
-
-        .formulario {
-            width: 100%;
-            display: none; /* Oculta o formulário inicialmente */
-            margin-top: 20px; /* Espaçamento acima do formulário */
         }
 
         iframe {
             width: 100%;
-            height: 500px; /* Altura do iframe */
+            height: 500px;
             border: none;
             border-radius: 10px;
         }
@@ -100,7 +127,7 @@
         }
 
         button {
-            background: #ff9908; /* Cor do botão PARTICIPAR */
+            background: #ff9908;
             color: #1e1e2e;
             border: none;
             padding: 10px 20px;
@@ -108,134 +135,184 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
-            margin-top: 20px; /* Espaçamento acima do botão */
+            margin-top: 20px;
         }
 
         button:hover {
-            background: #e68a00; /* Cor do botão ao passar o mouse */
+            background: #e68a00;
         }
 
-        /* Container do scrolling horizontal */
         .gallery {
-            width: 100%; /* Ocupa toda a largura da página */
-            overflow: hidden; /* Esconde o overflow para criar o efeito de scroll */
+            width: 100%;
+            overflow: hidden;
             position: relative;
-            background-color: rgba(0, 0, 0, 0.95); /* Fundo preto com 95% de transparência */
+            background-color: rgba(0, 0, 0, 0.95);
             display: flex;
-            align-items: center; /* Centraliza verticalmente as imagens */
-            margin-top: 100px;
-            margin-bottom: 100px;
-            height: 300px; /* Altura fixa da galeria */
+            align-items: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            height: 400px;
         }
 
-        /* Container das imagens */
         .scroll-container {
             display: flex;
-            animation: scroll 25s linear infinite; /* Animação de scroll */
+            animation: scroll 25s linear infinite;
         }
 
-        /* Animação de scroll horizontal */
         @keyframes scroll {
             0% {
-                transform: translateX(0); /* Começa no início */
+                transform: translateX(0);
             }
             100% {
-                transform: translateX(-50%); /* Move para a esquerda até a metade do conteúdo */
+                transform: translateX(-50%);
             }
         }
 
-        /* Estilo das imagens na galeria */
         .gallery img {
-            height: 250px; /* Altura fixa das imagens */
-            width: auto; /* Largura automática (mantém a proporção) */
+            height: 350px;
+            width: auto;
             border-radius: 10px;
-            margin-right: 15px; /* Distância entre as imagens */
-            object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+            margin-right: 15px;
+            object-fit: cover;
         }
 
-        /* Banner de contato no rodapé */
+        .flyer-button {
+            background-color: #ff9908;
+            color: rgba(58, 58, 74);
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .flyer-button:hover {
+            background-color: #cc7700;
+            transform: scale(1.05);
+        }
+
         .contact-banner {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px; /* Altura do banner */
-            background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro */
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Espaçamento entre os itens */
-            z-index: 1000; /* Garante que o banner fique acima de tudo */
+            gap: 20px;
+            z-index: 1000;
         }
 
         .contact-banner a {
-            color: #ffffff;
+            color: rgba(58, 58, 74);
             text-decoration: none;
-            font-size: 14px; /* Tamanho da fonte */
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 5px; /* Espaçamento entre ícone e texto */
+            gap: 5px;
         }
 
         .contact-banner a:hover {
-            color: #ff9908; /* Cor ao passar o mouse */
+            color: #ff9908;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                width: 100%;
+            }
+
+            .winners-list {
+                width: 100%;
+                position: static;
+                transform: none;
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Logo no topo da página -->
     <img src="img/logo.png" alt="Logo do Torneio" class="logo">
 
     <div class="content">
         <div class="container">
-            <!-- Flyer -->
             <div class="flyer">
                 <img src="img/flyer.jpg" alt="Flyer do Torneio">
                 <br/>
-                <!-- Botão PARTICIPAR -->
-                <button onclick="mostrarFormulario()">PARTICIPAR</button>
+                <a href="https://api.whatsapp.com/send?phone=5519999822720&text=Olá!%2C%20Vim%20pelo%20site!%20Gostaria%20de%20mais%20informações%20sobre%20os%20torneios%20de%20Yu-Gi-OH!.">
+                    <button class="flyer-button"> SABER MAIS </button>
+                </a>
             </div>
+        </div>
 
-            <!-- Formulário do Google (oculto inicialmente) -->
-            <div class="formulario" id="formulario">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScdipGlsNCvtjmmg1poofH8u-GI0tX_SuUbq7yJcB1EvejwTw/viewform?usp=sharing">Carregando…</iframe>
-            </div>
+        <div class="winners-list">
+            <h2>Quadro dos Campeões</h2>
+            <ul id="winners-list"></ul>
         </div>
     </div>
 
-    <!-- Galeria com scrolling horizontal -->
     <div class="gallery">
-        <div class="scroll-container">
-            <img src="img/image-1.jpeg" alt="Torneio anterior">
-            <img src="img/image-2.jpeg" alt="Torneio anterior">
-            <img src="img/image-3.jpeg" alt="Torneio anterior">
-            <img src="img/image-4.jpeg" alt="Torneio anterior">
-            <img src="img/image-5.jpeg" alt="Torneio anterior">
-            <img src="img/image-6.jpeg" alt="Torneio anterior">
-            <img src="img/image-7.jpeg" alt="Torneio anterior">
-            <!-- Repetir as imagens para criar o efeito de loop -->
-            <img src="img/image-1.jpeg" alt="Torneio anterior">
-            <img src="img/image-2.jpeg" alt="Torneio anterior">
-            <img src="img/image-3.jpeg" alt="Torneio anterior">
-            <img src="img/image-4.jpeg" alt="Torneio anterior">
-            <img src="img/image-5.jpeg" alt="Torneio anterior">
-            <img src="img/image-6.jpeg" alt="Torneio anterior">
-            <img src="img/image-7.jpeg" alt="Torneio anterior">
-        </div>
+        <div class="scroll-container" id="scroll-container"></div>
     </div>
 
-    <!-- Banner de contato no rodapé -->
     <div class="contact-banner">
-        <a href="+55 19 99982-2720">📞 (19)99982-2720</a>
+        <a href="https://api.whatsapp.com/send?phone=5519999822720&text=Olá!%2C%20Vim%20pelo%20site!%20Gostaria%20de%20mais%20informações%20sobre%20os%20torneios%20de%20Yu-Gi-OH!.">📞 Contato: (19)99982-2720</a>
         <a href="https://chat.whatsapp.com/F5dpfSfEqGH7M83mg8pMLb" target="_blank">💬 Grupo WhatsApp</a>
     </div>
 
     <script>
-        // Função para mostrar o formulário
-        function mostrarFormulario() {
-            const formulario = document.getElementById('formulario');
-            formulario.style.display = 'block'; // Exibe o formulário
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const imageContainer = document.getElementById("scroll-container");
+            const imageCount = 7;
+
+            for (let i = 1; i <= imageCount; i++) {
+                let img = document.createElement("img");
+                img.src = `img/image-${i}.jpeg`;
+                img.alt = "Torneio anterior";
+                imageContainer.appendChild(img);
+            }
+
+            for (let i = 1; i <= imageCount; i++) {
+                let img = document.createElement("img");
+                img.src = `img/image-${i}.jpeg`;
+                img.alt = "Torneio anterior";
+                imageContainer.appendChild(img);
+            }
+
+            // Carregar a lista de vencedores
+            fetch('winners.csv')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo CSV');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const winnersList = document.getElementById('winners-list');
+                    const winners = data.split(';');
+                    winners.forEach(winner => {
+                        if (winner.trim() !== '') {
+                            const [date, name] = winner.split(',');
+                            const li = document.createElement('li');
+                            li.textContent = `${date.trim()}: ${name.trim()}`;
+                            winnersList.appendChild(li);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar a lista de vencedores:', error);
+                    const winnersList = document.getElementById('winners-list');
+                    winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
+                });
+        });
     </script>
 </body>
 </html>
