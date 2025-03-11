@@ -305,12 +305,11 @@
                 })
                 .then(data => {
                     const winnersList = document.getElementById('winners-list');
-                    const lines = data.split('\n'); // Divide o CSV por linhas
-                    lines.forEach(line => {
-                        if (line.trim() !== '') { // Ignora linhas vazias
-                            const [date, name] = line.split(','); // Divide cada linha por vírgula
+                    const items = data.split(','); // Divide o conteúdo por vírgula
+                    items.forEach(item => {
+                        if (item.trim() !== '') { // Ignora itens vazios
                             const li = document.createElement('li');
-                            li.textContent = `${date.trim()}: ${name.trim()}`;
+                            li.textContent = item.trim(); // Remove espaços em branco
                             winnersList.appendChild(li);
                         }
                     });
@@ -321,6 +320,7 @@
                     winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
                 });
         });
+    </script>
     </script>
 </body>
 </html>
