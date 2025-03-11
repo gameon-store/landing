@@ -55,7 +55,6 @@
             width: 60%;
             max-width: 800px;
             padding: 20px;
-            height:50vh;
             background-color: rgba(58, 58, 74, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -287,31 +286,25 @@
                 imageContainer.appendChild(img);
             }
 
-            // Carregar a lista de vencedores
-            fetch('winners.csv')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo CSV');
+            // Simulação dos dados do CSV
+            const csvData = "25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu";
+
+            try {
+                const winnersList = document.getElementById('winners-list');
+                const winners = csvData.split(';');
+                winners.forEach(winner => {
+                    if (winner.trim() !== '') {
+                        const [date, name] = winner.split(',');
+                        const li = document.createElement('li');
+                        li.textContent = `${date.trim()}: ${name.trim()}`;
+                        winnersList.appendChild(li);
                     }
-                    return response.text();
-                })
-                .then(data => {
-                    const winnersList = document.getElementById('winners-list');
-                    const winners = data.split(';');
-                    winners.forEach(winner => {
-                        if (winner.trim() !== '') {
-                            const [date, name] = winner.split(',');
-                            const li = document.createElement('li');
-                            li.textContent = `${date.trim()}: ${name.trim()}`;
-                            winnersList.appendChild(li);
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar a lista de vencedores:', error);
-                    const winnersList = document.getElementById('winners-list');
-                    winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
                 });
+            } catch (error) {
+                console.error('Erro ao processar a lista de vencedores:', error);
+                const winnersList = document.getElementById('winners-list');
+                winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
+            }
         });
     </script>
 </body>
