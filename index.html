@@ -227,6 +227,9 @@
 
             .container {
                 width: 100%;
+                max-width: 100%;
+                padding:10px;
+                margin-left:-15px;
             }
 
             .winners-list {
@@ -234,6 +237,12 @@
                 position: static;
                 transform: none;
                 margin-top: 20px;
+                right: auto;
+                top: auto;
+            }
+
+            .flyer img {
+                max-width: 90%;
             }
         }
     </style>
@@ -286,25 +295,31 @@
                 imageContainer.appendChild(img);
             }
 
-            // Simulação dos dados do CSV
-            const csvData = "25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu;25/02/24,Takeshi;30/03/24, Giu";
-
-            try {
-                const winnersList = document.getElementById('winners-list');
-                const winners = csvData.split(';');
-                winners.forEach(winner => {
-                    if (winner.trim() !== '') {
-                        const [date, name] = winner.split(',');
-                        const li = document.createElement('li');
-                        li.textContent = `${date.trim()}: ${name.trim()}`;
-                        winnersList.appendChild(li);
+            // Carregar a lista de vencedores
+            fetch('winners.csv')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo CSV');
                     }
+                    return response.text();
+                })
+                .then(data => {
+                    const winnersList = document.getElementById('winners-list');
+                    const winners = data.split(';');
+                    winners.forEach(winner => {
+                        if (winner.trim() !== '') {
+                            const [date, name] = winner.split(',');
+                            const li = document.createElement('li');
+                            li.textContent = `${date.trim()}: ${name.trim()}`;
+                            winnersList.appendChild(li);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar a lista de vencedores:', error);
+                    const winnersList = document.getElementById('winners-list');
+                    winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
                 });
-            } catch (error) {
-                console.error('Erro ao processar a lista de vencedores:', error);
-                const winnersList = document.getElementById('winners-list');
-                winnersList.innerHTML = '<li>Erro ao carregar a lista de vencedores.</li>';
-            }
         });
     </script>
 </body>
