@@ -305,7 +305,7 @@
                 })
                 .then(data => {
                     const winnersList = document.getElementById('winners-list');
-                    const winners = data.split(';');
+                    const winners = data.split(' ');
                     winners.forEach(winner => {
                         if (winner.trim() !== '') {
                             const [date, name] = winner.split(',');
